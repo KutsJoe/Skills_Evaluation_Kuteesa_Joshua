@@ -42,6 +42,12 @@ class Circle implements ShapeInterface
         return 2 * pi() * $this->radius;
     }
 
+
+    # Calculate the diameter of the circle
+    public function calculateDiameter(): float
+    {
+        return 2 * $this->radius;
+    }
     
 }
 
