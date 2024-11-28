@@ -1,35 +1,24 @@
-# Use an official PHP runtime as a parent image
-FROM php:8.1-fpm
+FROM php:8.2-apache
 
-# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libicu-dev \
-    libxml2-dev \
-    git \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql intl opcache
+  git zip unzip libpng-dev \
+  libzip-dev default-mysql-client
 
-# Install Composer (PHP dependency manager)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN docker-php-ext-install pdo pdo_mysql zip gd
 
-# Set the working directory to /var/www
+RUN a2enmod rewrite
+
 WORKDIR /var/www
 
-# Copy the current directory contents into the container
 COPY . /var/www
 
-# Install Symfony CLI globally
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Symfony dependencies
-RUN composer install --no-scripts --no-autoloader
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-scripts --no-autoloader
 
-# Expose port 9000 and start PHP-FPM
-EXPOSE 9000
-CMD ["php-fpm"]
+EXPOSE 80
 
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' \
+  /etc/apache2/sites-available/000-default.conf
+
+CMD ["apache2-foreground"]
