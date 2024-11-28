@@ -1,6 +1,6 @@
 # Skills Test Symfony Project - Kuteesa Joshua Odera
 
-This repository contains a Symfony project set up with Docker or if you already have Symfony installed, you can just run the application once cloned and you cd into the folder. The Docker setup includes a PHP-FPM container, an Nginx web server container, and a MySQL database container, all managed using Docker Compose. This allows you to run the Symfony application in a consistent and isolated environment.
+This repository contains a Symfony project set up with Docker or if you already have Symfony installed, you can just run the application once cloned and you cd into the folder. The Docker setup includes a php-apache container, an apache web server container, and a MySQL database container, all managed using Docker Compose. This allows you to run the Symfony application in a consistent and isolated environment.
 
 ## Prerequisites
 
@@ -89,7 +89,7 @@ Run the following command to start the containers in the background:
 docker-compose up -d
 ```
 
-This will start the Symfony application, Nginx web server, and MySQL database.
+This will start the Symfony application, Apache web server, and MySQL database.
 
 ### 4. Install Symfony Dependencies
 

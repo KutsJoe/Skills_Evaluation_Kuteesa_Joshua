@@ -23,8 +23,10 @@ class RoutesController extends AbstractController
     #[Route('/circle/{radius}', name: 'circle', methods:['GET', 'HEAD'])]
     public function circle($radius,  SerializerInterface $serializer): Response
     {
+        #Create new circle object
         $circle = new Circle($radius);
 
+        #Build json response
         $circleJson = 
         [
             "type" => $circle->getType(),
@@ -42,8 +44,10 @@ class RoutesController extends AbstractController
     #[Route('/triangle/{a}/{b}/{c}', name: 'triangle', methods:['GET', 'HEAD'])]
     public function triangle($a, $b, $c,   SerializerInterface $serializer): Response
     {
+        #Create new triangle object
         $triangle = new Triangle($a, $b, $c);
 
+        #Build json response
         $triangleJson = 
         [
             "type" => $triangle->getType(),
@@ -58,8 +62,6 @@ class RoutesController extends AbstractController
 
         return JsonResponse::fromJsonString($jsonResponse);
     }
-
-    
 
 
 }
