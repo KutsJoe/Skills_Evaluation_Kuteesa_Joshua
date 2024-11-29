@@ -79,7 +79,7 @@ Use Docker Compose to build the necessary containers:
 docker-compose build
 ```
 
-This will build the PHP-FPM container, Nginx container, and MySQL container as defined in the `Dockerfile` and `docker-compose.yml` files.
+This will build the PHP-FPM container, Apache container, and MySQL container as defined in the `Dockerfile` and `docker-compose.yml` files.
 
 ### 3. Start the Containers
 
@@ -117,7 +117,7 @@ Once everything is set up, you can access the Symfony application in your browse
 http://localhost:8080
 ```
 
-This is the Nginx web server's default port mapped to the host machine's port `8080`.
+This is the Apache web server's default port mapped to the host machine's port `8080`.
 
 ### 6. Stopping the Containers
 
